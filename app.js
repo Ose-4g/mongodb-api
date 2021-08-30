@@ -1,9 +1,16 @@
-require("dotenv").config();
-const express = require("express");
+require("dotenv").config()
+const express = require("express")
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
-const errorHandler = require("./error/errorHandler");
-const AppError = require("./error/appError");
+const errorHandler = require("./error/errorHandler")
+const AppError = require("./error/appError")
+
+
+
+//import crud routers
+const crudRouter = require('./routes/crud')
+
+
 
 const {
     getAllCollections,
@@ -19,9 +26,15 @@ const app = express()
 
 //setting up app middlewares
 app.use(cookieParser())
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(cors())
+
+
+
+//adding routers
+app.use('/crud',crudRouter)
+
 
 //base routes
 
@@ -32,24 +45,6 @@ app.get('/',(req,res)=>{
 })
 
 
-
-
-//routes to read from db
-
-//get a list of all collections
-app.get('/collections',getAllCollections)
-
-//get all documents in a collection
-app.get('/:collection/find',find)
-
-
-
-
-
-//routes to write to db
-
-//create a new document in a collection
-app.post('/:collection/insert-one',insertOne)
 
 
 
