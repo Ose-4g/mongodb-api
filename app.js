@@ -23,12 +23,33 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
+//base routes
+
+app.get('/',(req,res)=>{
+    res.status(200).json({
+        message:"Welcome to the test zuri-core api. It is just for use during development as we await from team newton"
+    })
+})
+
+
+
 
 //routes to read from db
+
+//get a list of all collections
 app.get('/collections',getAllCollections)
-app.post('/:collection/insert-one',insertOne)
+
+//get all documents in a collection
 app.get('/:collection/find',find)
 
+
+
+
+
+//routes to write to db
+
+//create a new document in a collection
+app.post('/:collection/insert-one',insertOne)
 
 
 
