@@ -2,27 +2,41 @@ const {MongoClient} = require('mongodb')
 
 const MONGO_URL = process.env.MONGO_URL
 
-const client = new MongoClient(MONGO_URL);
+const client = new MongoClient(MONGO_URL, {
 
-module.exports = async()=>{
-    try 
+    useNewUrlParser: true,
+    
+    useUnifiedTopology: true
+    
+    });
+
+let connected = false
+let db
+
+
+const connectToMongo = async()=>{
+    try
     {
-        // Connect the client to the server
-        await client.connect();
+        if(!connected)
+        {
+            // Connect the client to the server
+            await client.connect();
 
-        // Establish and verify connection
-        await client.db("admin").command({ ping: 1 });
-        console.log("Connected successfully to server");
+            // Establish and verify connection
+            db = await client.db('mongo-api')
+            connected = true
+            console.log("Connected successfully to server");
+        }
+        
+        return db
     }
 
     catch(err)
     {
         console.log(err)
     }
-      
-    finally 
-    {
-        // Ensures that the client will close when you finish/error
-        await client.close();
-    }
+}
+
+module.exports = {
+    connectToMongo
 }
