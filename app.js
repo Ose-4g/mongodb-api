@@ -23,6 +23,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
+
+//routes to read from db
 app.get('/collections',getAllCollections)
 app.post('/:collection/insert-one',insertOne)
 app.get('/:collection/find',find)
