@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const {
     getAllCollections,
-    find
+    find,
+    findOne
 } = require('../controllers/crud/read')
 
 const {
@@ -16,6 +17,9 @@ router.get('/collections',getAllCollections)
 
 //get all documents in a collection
 router.get('/:collection/find',find)
+
+//get a single document in a collection
+router.get('/:collection/find-one',findOne)
 
 
 
