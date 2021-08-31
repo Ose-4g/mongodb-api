@@ -1,6 +1,7 @@
 const app = require('./app')
 const http = require('http')
 const {connectToMongo} = require('./utils/connectToMongo')
+const seed = require('./seed')
 
 
 
@@ -11,8 +12,7 @@ const server = http.createServer(app);
 
 const startServer = async()=>{
     await connectToMongo()
-    //console.log(db)
-    //console.log(exports.db)
+    await seed()
     server.listen(PORT, () => {
         console.log(`
         ################################################
