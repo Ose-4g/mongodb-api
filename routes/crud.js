@@ -2,11 +2,13 @@ const router = require('express').Router()
 const {
     getAllCollections,
     find,
-    findOne
+    findOne,
+    findById
 } = require('../controllers/crud/read')
 
 const {
-    insertOne
+    insertOne,
+    insertMany
 } = require('../controllers/crud/write')
 
 
@@ -21,6 +23,9 @@ router.get('/:collection/find',find)
 //get a single document in a collection
 router.get('/:collection/find-one',findOne)
 
+//find an object by id
+router.get('/:collection/find-by-id/:id',findById)
+
 
 
 
@@ -29,6 +34,9 @@ router.get('/:collection/find-one',findOne)
 
 //create a new document in a collection
 router.post('/:collection/insert-one',insertOne)
+
+//creates multiple new documents
+router.post('/:collection/insert-many',insertMany)
 
 
 module.exports = router
