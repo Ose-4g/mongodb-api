@@ -64,6 +64,11 @@ exports.findOne = async(req,res,next)=>{
 
     const data = await db.collection(collection).findOne(filter)
 
+    if(!data)
+    {
+        return next(new AppError("document not found",404))
+    }
+
     return res.status(200).json({
         status:"success",
         data
@@ -92,6 +97,11 @@ exports.findById = async(req,res,next)=>{
     }
 
     const data = await db.collection(collection).findOne({_id:ObjectId(id)})
+
+    if(!data)
+    {
+        return next(new AppError("document not found",404))
+    }
 
     return res.status(200).json({
         status:"success",
