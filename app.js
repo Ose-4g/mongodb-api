@@ -34,7 +34,7 @@ app.use(cors())
 
 //adding routers
 app.use('/crud',crudRouter)
-
+app.use()
 
 //base routes
 
