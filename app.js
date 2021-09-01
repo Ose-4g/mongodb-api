@@ -9,6 +9,7 @@ const AppError = require("./error/appError")
 
 //import crud routers
 const crudRouter = require('./routes/crud')
+const authRouter = require('./routes/auth')
 
 
 
@@ -34,6 +35,7 @@ app.use(cors())
 
 //adding routers
 app.use('/crud',crudRouter)
+app.use('/auth',authRouter)
 
 
 //base routes
