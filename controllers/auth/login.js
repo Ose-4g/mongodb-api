@@ -13,7 +13,7 @@ module.exports =  async(req,res,next)=>{
     }
 
     const db = await connectToMongo()
-    const user = await db.collections("users").findOne({email})
+    const user = await db.collection("users").findOne({email})
     
     if(!user)
     {

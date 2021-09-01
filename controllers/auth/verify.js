@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const AppError = require('../../error/appError')
 const {connectToMongo} = require('../../utils/connectToMongo')
+const ObjectId = require('mongodb').ObjectId
 
 
 module.exports =  async(req,res,next)=>{
@@ -26,7 +27,9 @@ module.exports =  async(req,res,next)=>{
             const {_id} = decoded
             console.log(_id)
 
-            const user = db.collection('users').findOne({_id})
+            const user = await db.collection('users').findOne({_id:ObjectId(_id)})
+
+            console.log(user)
 
             if(!user)
             {
