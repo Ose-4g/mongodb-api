@@ -9,6 +9,14 @@ exports.deleteOne = async(req,res,next)=>{
 
     let {filter} = req.body
 
+    if (filter && filter._id)
+    {
+        const oid = new ObjectId(filter._id)
+        delete filter._id
+        filter = {_id: oid, ... filter}
+        console.log(filter)
+    }
+
     filter = filter ? filter : {}
 
 
