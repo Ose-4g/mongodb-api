@@ -10,6 +10,8 @@ const AppError = require("./error/appError")
 //import crud routers
 const crudRouter = require('./routes/crud')
 const authRouter = require('./routes/auth')
+const readRouter = require('./routes/read')
+const writeRouter = require('./routes/write')
 
 
 
@@ -38,6 +40,8 @@ app.use('/crud',crudRouter)
 
 app.use('/auth',authRouter)
 
+app.use('/data/read',readRouter)
+app.use('/data/write',writeRouter)
 
 //base routes
 
