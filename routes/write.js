@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const {insert,update} = require('../controllers/write/write') 
+const {insert,update,deleteDoc} = require('../controllers/write/write') 
 
 
 const router = Router()
@@ -7,6 +7,8 @@ const router = Router()
 router.post('/',insert)
 
 router.put('/',update)
+
+router.delete('/',deleteDoc)
 
 module.exports = router
 

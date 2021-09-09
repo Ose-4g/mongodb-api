@@ -105,3 +105,37 @@ exports.update = async(req,res,next)=>{
         return next(error)
     }
 }
+
+exports.deleteDoc = async(req,res,next)=>{
+    let {collection_name, filter, bulk_write, object_id} = req.body
+
+    try{
+        const db = await connectToMongo()
+
+        //if object id is defined then ignore all other filters and use only objectId
+        filter = (object_id!==null && object_id!==undefined && object_id !=="") ? {_id:ObjectId(object_id)} : filter
+
+        //if filter is null set it to an empty object
+        filter = filter ? filter : {}
+
+        if(bulk_write==true)
+        {    
+            
+            const response = await db.collection(collection_name).deleteMany(filter)
+            return res.status(200).json(response)
+    
+        }
+
+        else{
+
+            const doc = await db.collection(collection_name).deleteOne(filter)
+    
+            return res.status(200).json(doc)
+        }
+    }
+    
+    catch (error) {
+        return next(error)
+    }
+
+}
