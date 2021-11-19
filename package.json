@@ -7,7 +7,7 @@
     "heroku-prebuild": "npm i -f",
     "dev": "nodemon server.js",
     "start": "NODE_ENV=production node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\""
   },
   "keywords": [],
   "author": "",
